@@ -67,3 +67,19 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+### Docker
+
+To start a local database
+
+    docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=papanoel -d postgres
+
+#### To connect directly to the database
+
+To run psql command, `su` is required
+
+    su postgres
+
+From within the container, connect to the docker database using : 
+
+    psql -d papanoel -U postgres
