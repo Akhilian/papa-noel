@@ -61,7 +61,7 @@ export default {
 
   server: {
     // listen on all interfaces, see https://nuxtjs.org/docs/2.x/features/configuration#edit-host-and-port
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     // use $PORT environment or default to port 3000
     port: process.env.PORT || 3000
   }
