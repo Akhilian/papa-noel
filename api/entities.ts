@@ -1,5 +1,5 @@
 export class Participant {
-  prenom: string;
+  prenom: string
 
   constructor (prenom: string) {
     this.prenom = prenom
@@ -12,8 +12,8 @@ export type Tuple = {
 }
 
 export class Famille {
-  nom: string;
-  membres: Array<Participant>;
+  nom: string
+  membres: Array<Participant>
 
   constructor (nom: string, membres: Array<Participant>) {
     this.nom = nom
@@ -22,7 +22,7 @@ export class Famille {
 }
 
 export class TirageAuSort {
-  familles: Array<Famille>;
+  familles: Array<Famille>
   shuffle: Function
 
   constructor (familles: Array<Famille>, shuffle?: Function) {
@@ -74,7 +74,7 @@ export class TirageAuSort {
 }
 
 export class Resultat {
-  resultat: Array<Tuple>;
+  resultat: Array<Tuple>
   constructor (resultat: Array<Tuple>) {
     this.resultat = resultat
   }
