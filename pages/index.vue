@@ -13,32 +13,24 @@
   >
     <div
       class="
-        flex flex-col
-        space-x-4
-        md:flex-row
+        flex-1
         bg-gray-50
         p-4
         rounded-md
         shadow-lg
         max-w-screen-md
+        space-y-4
       "
     >
-      <div class="flex justify-center">
-        <nuxt-img src="/img/santa-claus.svg" class="w-16" alt="" />
+      <Title>
+        Administration
+      </Title>
+      <div>
+        <p><strong>Nombre d'inscrits :</strong> 8</p>
+        <p><strong>Statut du tirage au sort :</strong> En attente</p>
       </div>
-      <div class="flex-1 space-y-2">
-        <h1 class="text-2xl font-medium">
-          Oh oh oh !
-        </h1>
-        <p>
-          Mes petits lutins ont tellement travaillé cette année que j'aurais
-          bien besoin de ton aide pour distribuer des cadeaux à tous les enfants
-          qui ont été sage.
-        </p>
-        <p>
-          Cette année, tu seras la joyeux Papa Noël de
-          <strong>Catherine</strong>.
-        </p>
+      <div class="text-right">
+        <Bouton>Lancer le tirage au sort</Bouton>
       </div>
     </div>
   </div>
