@@ -40,7 +40,7 @@
     "eslint": "^7.29.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
-    "jest": "^27.0.5",
+    "jest": "^27.4.1",
     "postcss": "^8.3.5",
     "prisma": "3.5.0",
     "ts-jest": "^27.0.3",
