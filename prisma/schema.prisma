@@ -2,17 +2,53 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id       Int            @id @default(autoincrement())
+  name     String
+  tirages  TirageAuSort[]
+  familles Famille[]
+}
+
+model TirageAuSort {
+  id        Int      @id @default(autoincrement())
+  Session   Session? @relation(fields: [sessionId], references: [id])
+  sessionId Int?
+  Duo       Duo[]
+}
+
+model Duo {
+  id             Int          @id @default(autoincrement())
+  tirage         TirageAuSort @relation(fields: [tirageAuSortId], references: [id])
+  tirageAuSortId Int
+  participantId  Int
+  participant    Participant  @relation("participant", fields: [participantId], references: [id])
+  beneficiaireId Int
+  beneficiaire   Participant  @relation("beneficiaire", fields: [beneficiaireId], references: [id])
 }
 
 model Participant {
-    id        Int     @id @default(autoincrement())
-    email     String  @unique
-    name      String?
-    telephone String?
+  id              Int      @id @default(autoincrement())
+  email           String?  @unique
+  name            String
+  telephone       String   @unique
+  Famille         Famille? @relation(fields: [familleId], references: [id])
+  familleId       Int?
+  participantDuo  Duo[]    @relation("participant")
+  beneficiaireDuo Duo[]    @relation("beneficiaire")
+}
+
+model Famille {
+  id           Int           @id @default(autoincrement())
+  name         String
+  participants Participant[]
+  Session      Session?      @relation(fields: [sessionId], references: [id])
+  sessionId    Int?
 }

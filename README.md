@@ -83,3 +83,9 @@ To run psql command, `su` is required
 From within the container, connect to the docker database using : 
 
     psql -d papanoel -U postgres
+
+### Seeding the database
+
+To generate the data
+
+  npx prisma db seed

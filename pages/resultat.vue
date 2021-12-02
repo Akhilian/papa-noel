@@ -24,7 +24,7 @@
       "
     >
       <div class="flex justify-center">
-        <img src="/img/santa-claus.svg" class="w-16" alt="" >
+        <img src="/img/santa-claus.svg" class="w-16" alt="">
       </div>
       <div class="flex-1 space-y-2">
         <Title>
