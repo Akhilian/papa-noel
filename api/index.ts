@@ -1,10 +1,22 @@
 import express, { Request, Response } from 'express'
+import router from './tirage-au-sort/lancer/rest'
 const bodyParser = require('body-parser')
-const app = express()
+const api = express()
 
-app.use(bodyParser.json())
-app.all('/getJSON', (_: Request, res: Response) => {
+api.use(bodyParser.json())
+
+api.use('/', router)
+
+api.get('/resultat/adrien', (_: Request, res: Response) => {
+  res.json({
+    data: {
+      beneficiaire: 'Adrien'
+    }
+  })
+})
+
+api.all('/getJSON', (_: Request, res: Response) => {
   res.json({ data: 'data' })
 })
 
-module.exports = app
+export default api
