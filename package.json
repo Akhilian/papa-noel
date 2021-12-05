@@ -12,7 +12,8 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue,.ts\" --ignore-path .gitignore .",
     "lint": "yarn lint:js",
-    "test": "jest"
+    "test": "jest",
+    "migrate:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@nuxt/content": "^1.14.0",
