@@ -1,6 +1,18 @@
 import { Famille, Participant, TirageAuSort } from '~/api/tirage-au-sort/entities'
 
 describe('Tirage au sort', () => {
+  describe('contraintes', () => {
+    it('devrait être initié pour au moins une famille', () => {
+      // When
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const _ = new TirageAuSort([])
+      } catch (e) {
+        expect(e).toStrictEqual(new Error('Un tirage ne peut être démarrer sans aucune famille'))
+      }
+    })
+  })
+
   describe('proceder', () => {
     it('devrait associer des duos entre deux personnes de familles différentes', () => {
       // Given
