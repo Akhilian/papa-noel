@@ -1,5 +1,6 @@
-import { Famille, Participant } from '~/api/tirage-au-sort/entities'
+import { Session } from '~/api/tirage-au-sort/entities'
 import { prisma } from '~/api/prisma'
+import { FamilleSerializer } from '~/api/tirage-au-sort/serializer'
 
 export const getFamille = async (_: number) => {
   const familleTrouvee = await prisma.famille.findUnique({
@@ -14,12 +15,28 @@ export const getFamille = async (_: number) => {
     return undefined
   }
 
-  const listMembres = familleTrouvee.participants.map((participant) => {
-    return new Participant(participant.name)
+  return FamilleSerializer.fromORM(familleTrouvee)
+}
+
+export const getSession = async (_: number) => {
+  const session = await prisma.session.findUnique({
+    where: {
+      id: _
+    },
+    include: {
+      familles: {
+        include: {
+          participants: true
+        }
+      }
+    }
   })
 
-  return new Famille(
-    familleTrouvee.name,
-    listMembres
-  )
+  if (!session) {
+    return undefined
+  }
+
+  const familles = session.familles.map(FamilleSerializer.fromORM)
+
+  return new Session(familles)
 }

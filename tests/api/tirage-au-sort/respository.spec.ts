@@ -1,5 +1,5 @@
-import { getFamille } from '~/api/tirage-au-sort/repository'
-import { Famille } from '~/api/tirage-au-sort/entities'
+import { getFamille, getSession } from '~/api/tirage-au-sort/repository'
+import { Famille, Participant, Session } from '~/api/tirage-au-sort/entities'
 import { prisma } from '~/api/prisma'
 
 describe('Repository', () => {
@@ -32,7 +32,7 @@ describe('Repository', () => {
       expect(famille).toBeDefined()
       expect(famille).toBeInstanceOf(Famille)
       expect(famille?.nom).toBe('Saunier')
-      expect(famille?.membres).toHaveLength(1)
+      expect(famille?.participants).toHaveLength(1)
     })
 
     it('devrait retourner undefined quand la famille n’existe pas', async () => {
@@ -41,6 +41,93 @@ describe('Repository', () => {
 
       // Then
       expect(famille).toBe(undefined)
+    })
+  })
+
+  describe('Session', () => {
+    it('devrait retourner undefined quand la session n’existe pas', async function () {
+      // When
+      const famille = await getSession(-1)
+
+      // Then
+      expect(famille).not.toBeDefined()
+    })
+
+    it('devrait retourner une Session', async function () {
+      // Given
+      const sessionInDb = await prisma.session.create({
+        data: {
+          name: 'Session de Noel'
+        }
+      })
+
+      // When
+      const famille = await getSession(sessionInDb.id)
+
+      // Then
+      expect(famille).toBeDefined()
+      expect(famille).toBeInstanceOf(Session)
+    })
+
+    it('devrait retourner la liste des familles associées', async function () {
+      // Given
+      const sessionInDb = await prisma.session.create({
+        data: {
+          name: 'Session de Noel',
+          familles: {
+            create: [{
+              name: 'Saunier'
+            }, {
+              name: 'Varnier'
+            }]
+          }
+        }
+      })
+
+      // When
+      const session = await getSession(sessionInDb.id)
+
+      // Then
+      expect(session).toBeDefined()
+      expect(session?.familles).toHaveLength(2)
+
+      const premièreFamille = session?.familles[0]
+      expect(premièreFamille?.nom).toEqual('Saunier')
+
+      const secondeFamille = session?.familles[1]
+      expect(secondeFamille?.nom).toEqual('Varnier')
+    })
+
+    it('devrait retourner la liste des familles et leurs participants', async function () {
+      // Given
+      const sessionInDb = await prisma.session.create({
+        data: {
+          name: 'Session de Noel',
+          familles: {
+            create: [{
+              name: 'His',
+              participants: {
+                create: [{
+                  name: 'Jean',
+                  telephone: '0'
+                }, {
+                  name: 'Clémence',
+                  telephone: '1'
+                }]
+              }
+            }]
+          }
+        }
+      })
+
+      // When
+      const session = await getSession(sessionInDb.id)
+
+      // Then
+      expect(session).toBeDefined()
+      const premièreFamille = session?.familles[0]
+      expect(premièreFamille?.participants).toHaveLength(2)
+      expect(premièreFamille?.participants).toEqual([new Participant('Jean'), new Participant('Clémence')])
     })
   })
 })
