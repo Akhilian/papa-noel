@@ -1,6 +1,6 @@
-import { getFamille, getSession } from '~/api/tirage-au-sort/repository'
-import { Famille, Participant, Session } from '~/api/tirage-au-sort/entities'
 import { prisma } from '~/api/prisma'
+import { Famille, Participant, Session } from '~/api/gestionnaire/gestionnaire.entities'
+import { getFamille, getSession } from '~/api/gestionnaire/repository'
 
 describe('Repository', () => {
   afterEach(async () => {
@@ -89,6 +89,7 @@ describe('Repository', () => {
 
       // Then
       expect(session).toBeDefined()
+      expect(session?.nom).toEqual('Session de Noel')
       expect(session?.familles).toHaveLength(2)
 
       const premièreFamille = session?.familles[0]

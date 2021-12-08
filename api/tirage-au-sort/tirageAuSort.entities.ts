@@ -1,23 +1,20 @@
-export class Participant {
-  prenom: string
-
-  constructor (prenom: string) {
-    this.prenom = prenom
-  }
-}
+import { Famille, Participant } from '~/api/gestionnaire/gestionnaire.entities'
 
 export type Tuple = {
   participant: Participant,
   beneficiaire: Participant,
 }
 
-export class Famille {
-  nom: string
-  participants: Array<Participant>
+export class Resultat {
+  resultat: Array<Tuple>
 
-  constructor (nom: string, participants: Array<Participant>) {
-    this.nom = nom
-    this.participants = participants
+  constructor (resultat: Array<Tuple>) {
+    this.resultat = resultat
+  }
+
+  pour (participant: Participant) {
+    const tuple = this.resultat.find(tuple => tuple.participant === participant)
+    return tuple?.beneficiaire
   }
 }
 
@@ -81,30 +78,5 @@ export class TirageAuSort {
     return new Resultat(
       tuples
     )
-  }
-}
-
-export class Resultat {
-  resultat: Array<Tuple>
-
-  constructor (resultat: Array<Tuple>) {
-    this.resultat = resultat
-  }
-
-  pour (participant: Participant) {
-    const tuple = this.resultat.find(tuple => tuple.participant === participant)
-    return tuple?.beneficiaire
-  }
-}
-
-export class Session {
-  familles: Famille[]
-
-  constructor (famille: Famille[]) {
-    this.familles = famille
-  }
-
-  initierUnTirageAuSort () {
-    return new TirageAuSort(this.familles)
   }
 }

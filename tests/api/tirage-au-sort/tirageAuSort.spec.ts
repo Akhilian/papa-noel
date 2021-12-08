@@ -1,4 +1,5 @@
-import { Famille, Participant, TirageAuSort } from '~/api/tirage-au-sort/entities'
+import { TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
+import { Famille, Participant } from '~/api/gestionnaire/gestionnaire.entities'
 
 describe('Tirage au sort', () => {
   describe('contraintes', () => {
