@@ -1,10 +1,12 @@
-import { TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
+import { TirageAuSort } from '../tirage-au-sort/tirageAuSort.entities'
 
 export class Participant {
   prenom: string
+  telephone: string
 
-  constructor (prenom: string) {
+  constructor (prenom: string, telephone = '') {
     this.prenom = prenom
+    this.telephone = telephone
   }
 }
 

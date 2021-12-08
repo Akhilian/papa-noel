@@ -1,8 +1,8 @@
-import { prisma } from '~/api/prisma'
-import { FamilleSerializer } from '~/api/gestionnaire/serializer'
-import { Famille, Session } from '~/api/gestionnaire/gestionnaire.entities'
+import { prisma } from '../prisma'
+import { FamilleSerializer } from './serializer'
+import { Famille, Session } from './gestionnaire.entities'
 
-export const getSession = async (_: number) : Promise<Session|undefined> => {
+export const getSession = async (_: number): Promise<Session | undefined> => {
   const session = await prisma.session.findUnique({
     where: {
       id: _

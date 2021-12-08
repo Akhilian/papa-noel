@@ -1,4 +1,4 @@
-import { Famille, Participant } from '~/api/gestionnaire/gestionnaire.entities'
+import { Famille, Participant } from '../gestionnaire/gestionnaire.entities'
 
 export type Tuple = {
   participant: Participant,

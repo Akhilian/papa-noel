@@ -6,6 +6,8 @@ describe('Gestionnaire', () => {
   describe('Afficher la session', () => {
     afterEach(async () => {
       await prisma.session.deleteMany({})
+      await prisma.famille.deleteMany({})
+      await prisma.participant.deleteMany({})
     })
 
     describe('Interface REST', () => {
@@ -38,13 +40,78 @@ describe('Gestionnaire', () => {
         await supertest(api)
           .get(`/session/${sessionInDb.id}`)
           .expect('Content-Type', /json/)
-          .expect(200, {
-            id: `${sessionInDb.id}`,
-            nom: 'Première session',
-            links: {
-              self: `/session/${sessionInDb.id}`
-            }
+          .expect((res) => {
+            expect(res.body).toEqual({
+              id: `${sessionInDb.id}`,
+              data: {
+                nom: 'Première session',
+                familles: [
+                  {
+                    nom: 'Saunier',
+                    participants: []
+                  },
+                  {
+                    nom: 'Dupont',
+                    participants: []
+                  }
+                ]
+              },
+              links: {
+                self: `/session/${sessionInDb.id}`
+              }
+            })
           })
+          .expect(200)
+      })
+
+      it('retourne la session en incluant les participants', async () => {
+        // Given
+        const sessionInDb = await prisma.session.create({
+          data: {
+            name: 'Première session',
+            familles: {
+              create: [
+                {
+                  name: 'Saunier',
+                  participants: {
+                    create: [
+                      {
+                        name: 'Adrien',
+                        telephone: '0600000000'
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        })
+
+        // When
+        await supertest(api)
+          .get(`/session/${sessionInDb.id}`)
+          .expect('Content-Type', /json/)
+          .expect((res) => {
+            expect(res.body).toEqual({
+              id: `${sessionInDb.id}`,
+              data: {
+                nom: 'Première session',
+                familles: [
+                  {
+                    nom: 'Saunier',
+                    participants: [{
+                      prenom: 'Adrien',
+                      telephone: '********00'
+                    }]
+                  }
+                ]
+              },
+              links: {
+                self: `/session/${sessionInDb.id}`
+              }
+            })
+          })
+          .expect(200)
       })
     })
   })

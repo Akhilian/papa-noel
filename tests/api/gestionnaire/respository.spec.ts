@@ -128,7 +128,7 @@ describe('Repository', () => {
       expect(session).toBeDefined()
       const premièreFamille = session?.familles[0]
       expect(premièreFamille?.participants).toHaveLength(2)
-      expect(premièreFamille?.participants).toEqual([new Participant('Jean'), new Participant('Clémence')])
+      expect(premièreFamille?.participants).toEqual([new Participant('Jean', '0'), new Participant('Clémence', '1')])
     })
   })
 })
