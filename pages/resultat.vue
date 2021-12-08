@@ -50,8 +50,8 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'PageResultat',
 
-  async asyncData ({ $axios }) {
-    const resultat = await $axios.$get('http://localhost:3000/api/resultat/adrien')
+  async asyncData ({ $axios, $config }) {
+    const resultat = await $axios.$get($config.API_URL + '/resultat/adrien')
     return {
       beneficiaire: {
         prenom: resultat.data.beneficiaire

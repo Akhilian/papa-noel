@@ -33,8 +33,8 @@ export default Vue.extend({
   name: 'PageAccueil',
   components: { FamilyCard, Card, Title },
 
-  async asyncData ({ $axios }) {
-    const resultat = await $axios.$get('http://localhost:3000/api/session/152')
+  async asyncData ({ $axios, $config }) {
+    const resultat = await $axios.$get($config.API_URL + '/session/152')
 
     return {
       nom: resultat.data.nom,

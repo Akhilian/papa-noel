@@ -68,6 +68,14 @@ export default {
   build: {
   },
 
+  // Configuration event for front
+  // See https://nuxtjs.org/tutorials/moving-from-nuxtjs-dotenv-to-runtime-config
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL || 'http://localhost:3000/api'
+  },
+  // Configuration event ONLY FOR BACKEND
+  privateRuntimeConfig: {},
+
   server: {
     // listen on all interfaces, see https://nuxtjs.org/docs/2.x/features/configuration#edit-host-and-port
     host: '0.0.0.0',
