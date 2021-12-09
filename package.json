@@ -48,6 +48,10 @@
     "prisma": "3.6.0",
     "supertest": "^6.1.6",
     "ts-jest": "^27.1.0",
+    "ts-node": "^10.4.0",
     "vue-jest": "^3.0.4"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
