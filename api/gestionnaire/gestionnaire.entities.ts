@@ -1,4 +1,5 @@
 import { TirageAuSort } from '../tirage-au-sort/tirageAuSort.entities'
+import { melange } from '../tirage-au-sort/melange'
 
 export class Participant {
   prenom: string
@@ -30,6 +31,6 @@ export class Session {
   }
 
   initierUnTirageAuSort () {
-    return new TirageAuSort(this.familles)
+    return new TirageAuSort(this.familles, melange)
   }
 }
