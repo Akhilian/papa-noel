@@ -117,4 +117,28 @@ describe('Tirage au sort', () => {
       expect(resultat.pour(alix)).toBe(adrien)
     })
   })
+
+  describe('finaliser', function () {
+    it('ne devrait pas être possible de procéder à un tirage au sort déjà finalisé', function () {
+      // Given
+      const didier = new Participant('Didier')
+      const adrien = new Participant('Adrien')
+
+      const familles = [
+        new Famille('His', [didier]), new Famille('Saunier', [adrien])
+      ]
+      const tirageAuSort = new TirageAuSort(familles)
+
+      // When
+      tirageAuSort.proceder()
+      tirageAuSort.finaliser()
+
+      // Then
+      try {
+        tirageAuSort.proceder()
+      } catch (error) {
+        expect(error).toEqual(new Error('Impossible de procéder, le tirage au sort a été finalisé.'))
+      }
+    })
+  })
 })

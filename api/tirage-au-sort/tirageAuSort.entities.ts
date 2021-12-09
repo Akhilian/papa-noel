@@ -1,14 +1,14 @@
 import { Famille, Participant } from '../gestionnaire/gestionnaire.entities'
 
-export type Tuple = {
+export type Duo = {
   participant: Participant,
   beneficiaire: Participant,
 }
 
 export class Resultat {
-  resultat: Array<Tuple>
+  resultat: Array<Duo>
 
-  constructor (resultat: Array<Tuple>) {
+  constructor (resultat: Array<Duo>) {
     this.resultat = resultat
   }
 
@@ -21,8 +21,13 @@ export class Resultat {
 export class TirageAuSort {
   private familles: Array<Famille>
   private shuffle: Function
+  private _resultat?: Resultat
+  private _estFinalisé: boolean
 
   constructor (familles: Array<Famille>, shuffle?: Function) {
+    this._resultat = undefined
+    this._estFinalisé = false
+
     if (familles.length < 1) {
       throw new Error('Un tirage ne peut être démarrer sans aucune famille')
     }
@@ -32,7 +37,15 @@ export class TirageAuSort {
     })
   }
 
+  get resultat (): Resultat | undefined {
+    return this._resultat
+  }
+
   proceder () {
+    if (this._estFinalisé) {
+      throw new Error('Impossible de procéder, le tirage au sort a été finalisé.')
+    }
+
     type Options = {
       participant: Participant,
       famille: Famille,
@@ -60,7 +73,7 @@ export class TirageAuSort {
 
     this.shuffle(toutesLesOptions)
 
-    const tuples: Array<Tuple> = toutesLesParticipants.map((option) => {
+    const tuples: Array<Duo> = toutesLesParticipants.map((option) => {
       let optionRetenue = toutesLesOptions.find(possibleOption => possibleOption.famille !== option.famille)
 
       if (!optionRetenue) {
@@ -75,8 +88,15 @@ export class TirageAuSort {
       }
     })
 
-    return new Resultat(
+    const resultat = new Resultat(
       tuples
     )
+    this._resultat = resultat
+
+    return resultat
+  }
+
+  finaliser () {
+    this._estFinalisé = true
   }
 }
