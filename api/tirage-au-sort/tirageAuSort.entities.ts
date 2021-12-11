@@ -1,4 +1,4 @@
-import { Famille, Participant } from '../gestionnaire/gestionnaire.entities'
+import { Famille, Participant, SessionId } from '../gestionnaire/gestionnaire.entities'
 
 export type Duo = {
   participant: Participant,
@@ -23,10 +23,12 @@ export class TirageAuSort {
   private shuffle: Function
   private _resultat?: Resultat
   private _estFinalisé: boolean
+  sessionId: SessionId
 
-  constructor (familles: Array<Famille>, shuffle?: Function) {
+  constructor (sessionId: SessionId, familles: Array<Famille>, shuffle?: Function) {
     this._resultat = undefined
     this._estFinalisé = false
+    this.sessionId = sessionId
 
     if (familles.length < 1) {
       throw new Error('Un tirage ne peut être démarrer sans aucune famille')

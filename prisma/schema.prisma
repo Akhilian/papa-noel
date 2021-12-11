@@ -21,24 +21,23 @@ model TirageAuSort {
   id        Int      @id @default(autoincrement())
   Session   Session? @relation(fields: [sessionId], references: [id])
   sessionId Int?
-  Duo       Duo[]
+  duos      Duo[]
 }
 
 model Duo {
   id             Int          @id @default(autoincrement())
   tirage         TirageAuSort @relation(fields: [tirageAuSortId], references: [id])
   tirageAuSortId Int
-  participantId  Int
-  participant    Participant  @relation("participant", fields: [participantId], references: [id])
-  beneficiaireId Int
-  beneficiaire   Participant  @relation("beneficiaire", fields: [beneficiaireId], references: [id])
+  participantId  BigInt
+  participant    Participant  @relation("participant", fields: [participantId], references: [telephone])
+  beneficiaireId BigInt
+  beneficiaire   Participant  @relation("beneficiaire", fields: [beneficiaireId], references: [telephone])
 }
 
 model Participant {
-  id              Int      @id @default(autoincrement())
+  telephone       BigInt   @id @unique
   email           String?  @unique
   name            String
-  telephone       String   @unique
   Famille         Famille? @relation(fields: [familleId], references: [id])
   familleId       Int?
   participantDuo  Duo[]    @relation("participant")

@@ -1,7 +1,7 @@
 import { Famille, Participant, Session } from './gestionnaire.entities'
 
-const anonymiserNumeroDeTelephone = (numero: string) => {
-  return numero.replace(/^(\d{8})/, '********')
+const anonymiserNumeroDeTelephone = (numero: number) : string => {
+  return String(numero).replace(/^(\d{8})/, '********')
 }
 
 export const FamilleSerializer = {

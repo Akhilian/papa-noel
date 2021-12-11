@@ -1,14 +1,11 @@
 import supertest from 'supertest'
 import api from '~/api'
 import { prisma } from '~/api/prisma'
+import cleanDb from '~/tests/api/clean_db'
 
 describe('Gestionnaire', () => {
   describe('Afficher la session', () => {
-    afterEach(async () => {
-      await prisma.session.deleteMany({})
-      await prisma.famille.deleteMany({})
-      await prisma.participant.deleteMany({})
-    })
+    afterEach(cleanDb)
 
     describe('Interface REST', () => {
       it('retourne 404 quand la session n’est pas trouvé', async () => {
@@ -77,7 +74,7 @@ describe('Gestionnaire', () => {
                     create: [
                       {
                         name: 'Adrien',
-                        telephone: '0600000000'
+                        telephone: 33600000000
                       }
                     ]
                   }
@@ -101,7 +98,7 @@ describe('Gestionnaire', () => {
                     nom: 'Saunier',
                     participants: [{
                       prenom: 'Adrien',
-                      telephone: '********00'
+                      telephone: '********000'
                     }]
                   }
                 ]

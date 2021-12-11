@@ -22,7 +22,7 @@ export const getSession = async (_: number): Promise<Session | undefined> => {
 
   const familles = session.familles.map(FamilleSerializer.fromORM)
 
-  return new Session(session.name, familles)
+  return new Session({ id: session.id }, session.name, familles)
 }
 export const getFamille: (_: number) => Promise<undefined | Famille> = async (_: number) => {
   const familleTrouvee = await prisma.famille.findUnique({
