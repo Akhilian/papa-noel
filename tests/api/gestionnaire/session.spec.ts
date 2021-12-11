@@ -5,7 +5,7 @@ describe('Session', () => {
   describe('initierUnTirageAuSort', () => {
     it('devrait retourner un tirage au sort', () => {
       // Given
-      const session = new Session('', [new Famille('Saunier', [])])
+      const session = new Session({ id: 1 }, '', [new Famille('Saunier', [])])
 
       // When
       const tirageAuSort = session.initierUnTirageAuSort()

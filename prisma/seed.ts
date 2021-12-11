@@ -13,23 +13,23 @@ const sessionData: Prisma.SessionCreateInput = {
           create: [
             {
               name: 'Adrien',
-              telephone: '0'
+              telephone: 0
             },
             {
               name: 'Pauline',
-              telephone: '1'
+              telephone: 1
             },
             {
               name: 'Alix',
-              telephone: '2'
+              telephone: 2
             },
             {
               name: 'Catherine',
-              telephone: '3'
+              telephone: 3
             },
             {
               name: 'Frédéric',
-              telephone: '4'
+              telephone: 4
             }
           ]
         }

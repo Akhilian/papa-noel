@@ -1,12 +1,10 @@
 import { prisma } from '~/api/prisma'
-import { Famille, Participant, Session } from '~/api/gestionnaire/gestionnaire.entities'
+import { Famille, Session } from '~/api/gestionnaire/gestionnaire.entities'
 import { getFamille, getSession } from '~/api/gestionnaire/repository'
+import cleanDb from '~/tests/api/clean_db'
 
-describe('Repository', () => {
-  afterEach(async () => {
-    await prisma.participant.deleteMany({})
-    await prisma.famille.deleteMany({})
-  })
+describe('Gestionnaire - Repository', () => {
+  afterEach(cleanDb)
 
   describe('get Famille', () => {
     it('devrait retourner une Famille', async function () {
@@ -18,7 +16,7 @@ describe('Repository', () => {
             create: [
               {
                 name: 'Adrien',
-                telephone: '0'
+                telephone: 33600000000
               }
             ]
           }
@@ -99,6 +97,23 @@ describe('Repository', () => {
       expect(secondeFamille?.nom).toEqual('Varnier')
     })
 
+    it('devrait avoir un ID', async function () {
+      // Given
+      const sessionInDb = await prisma.session.create({
+        data: {
+          name: 'Session de Noel'
+        }
+      })
+
+      // When
+      const session = await getSession(sessionInDb.id)
+
+      // Then
+      expect(session).toBeDefined()
+      expect(session?.nom).toEqual('Session de Noel')
+      expect(session?.id).toEqual({ id: sessionInDb.id })
+    })
+
     it('devrait retourner la liste des familles et leurs participants', async function () {
       // Given
       const sessionInDb = await prisma.session.create({
@@ -110,10 +125,10 @@ describe('Repository', () => {
               participants: {
                 create: [{
                   name: 'Jean',
-                  telephone: '0'
+                  telephone: 33600000000
                 }, {
                   name: 'Clémence',
-                  telephone: '1'
+                  telephone: 33600000001
                 }]
               }
             }]
@@ -126,9 +141,17 @@ describe('Repository', () => {
 
       // Then
       expect(session).toBeDefined()
-      const premièreFamille = session?.familles[0]
-      expect(premièreFamille?.participants).toHaveLength(2)
-      expect(premièreFamille?.participants).toEqual([new Participant('Jean', '0'), new Participant('Clémence', '1')])
+
+      const participants = session?.familles[0]?.participants
+      expect(participants).toHaveLength(2)
+      if (participants) {
+        const jean = participants[0]
+        expect(jean.prenom).toEqual('Jean')
+        expect(jean.telephone).toStrictEqual(BigInt(33600000000))
+        const clémence = participants[1]
+        expect(clémence.prenom).toStrictEqual('Clémence')
+        expect(clémence.telephone).toStrictEqual(BigInt(33600000001))
+      }
     })
   })
 })

@@ -10,7 +10,7 @@ describe('Gestionnaire', () => {
           new Famille('Saunier', []),
           new Famille('His', [])
         ]
-        const session = new Session('2021', familles)
+        const session = new Session({ id: 1 }, '2021', familles)
 
         // When
         const json = SessionSerializer.toRest(session)
@@ -35,10 +35,10 @@ describe('Gestionnaire', () => {
         // Given
         const familles = [
           new Famille('Saunier', [
-            new Participant('Adrien', '0600000058')
+            new Participant('Adrien', 33600000058)
           ])
         ]
-        const session = new Session('2021', familles)
+        const session = new Session({ id: 1 }, '2021', familles)
 
         // When
         const json = SessionSerializer.toRest(session)
@@ -51,7 +51,7 @@ describe('Gestionnaire', () => {
               nom: 'Saunier',
               participants: [{
                 prenom: 'Adrien',
-                telephone: '********58'
+                telephone: '********058'
               }]
             }
           ]

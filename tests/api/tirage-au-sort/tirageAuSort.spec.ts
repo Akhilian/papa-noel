@@ -7,7 +7,7 @@ describe('Tirage au sort', () => {
       // When
       try {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const _ = new TirageAuSort([])
+        const _ = new TirageAuSort({ id: 1 }, [])
       } catch (e) {
         expect(e).toStrictEqual(new Error('Un tirage ne peut être démarrer sans aucune famille'))
       }
@@ -17,15 +17,15 @@ describe('Tirage au sort', () => {
   describe('proceder', () => {
     it('devrait associer des duos entre deux personnes de familles différentes', () => {
       // Given
-      const didier = new Participant('Didier')
-      const adrien = new Participant('Adrien')
+      const didier = new Participant('Didier', 33600000001)
+      const adrien = new Participant('Adrien', 33600000002)
 
       const familles = [
         new Famille('His', [didier]), new Famille('Saunier', [adrien])
       ]
 
       // When
-      const tirageAuSort = new TirageAuSort(familles)
+      const tirageAuSort = new TirageAuSort({ id: 1 }, familles)
       const resultat = tirageAuSort.proceder()
 
       // Then
@@ -37,16 +37,16 @@ describe('Tirage au sort', () => {
       // Given
       const shuffle = (array: Array<undefined>) => array.reverse()
 
-      const didier = new Participant('Didier')
-      const adrien = new Participant('Adrien')
-      const maelle = new Participant('Maëlle')
+      const didier = new Participant('Didier', 33600000001)
+      const adrien = new Participant('Adrien', 33600000002)
+      const maelle = new Participant('Maëlle', 33600000003)
 
       const familles = [
         new Famille('His', [didier]), new Famille('Saunier', [adrien]), new Famille('Varnier', [maelle])
       ]
 
       // When
-      const tirageAuSort = new TirageAuSort(familles, shuffle)
+      const tirageAuSort = new TirageAuSort({ id: 1 }, familles, shuffle)
       const resultat = tirageAuSort.proceder()
 
       // Then
@@ -57,16 +57,16 @@ describe('Tirage au sort', () => {
       // Given
       const shuffle = (array: Array<undefined>) => array.reverse()
 
-      const didier = new Participant('Didier')
-      const adrien = new Participant('Adrien')
-      const alix = new Participant('Alix')
+      const didier = new Participant('Didier', 33600000001)
+      const adrien = new Participant('Adrien', 33600000002)
+      const alix = new Participant('Alix', 33600000003)
 
       const familles = [
         new Famille('His', [didier]), new Famille('Saunier', [adrien, alix])
       ]
 
       // When
-      const tirageAuSort = new TirageAuSort(familles, shuffle)
+      const tirageAuSort = new TirageAuSort({ id: 1 }, familles, shuffle)
       const resultat = tirageAuSort.proceder()
 
       // Then
@@ -77,17 +77,17 @@ describe('Tirage au sort', () => {
       // Given
       const shuffle = (array: Array<undefined>) => array
 
-      const didier = new Participant('Didier')
-      const patricia = new Participant('Patricia')
-      const adrien = new Participant('Adrien')
-      const alix = new Participant('Alix')
+      const didier = new Participant('Didier', 33600000001)
+      const patricia = new Participant('Patricia', 33600000002)
+      const adrien = new Participant('Adrien', 33600000003)
+      const alix = new Participant('Alix', 33600000003)
 
       const familles = [
         new Famille('Saunier', [adrien, alix]), new Famille('His', [didier, patricia])
       ]
 
       // When
-      const tirageAuSort = new TirageAuSort(familles, shuffle)
+      const tirageAuSort = new TirageAuSort({ id: 1 }, familles, shuffle)
       const resultat = tirageAuSort.proceder()
 
       // Then
@@ -101,15 +101,15 @@ describe('Tirage au sort', () => {
       // Given
       const shuffle = (array: Array<undefined>) => array
 
-      const adrien = new Participant('Adrien')
-      const alix = new Participant('Alix')
+      const adrien = new Participant('Adrien', 33600000001)
+      const alix = new Participant('Alix', 33600000002)
 
       const familles = [
         new Famille('Saunier', [adrien, alix])
       ]
 
       // When
-      const tirageAuSort = new TirageAuSort(familles, shuffle)
+      const tirageAuSort = new TirageAuSort({ id: 1 }, familles, shuffle)
       const resultat = tirageAuSort.proceder()
 
       // Then
@@ -121,13 +121,13 @@ describe('Tirage au sort', () => {
   describe('finaliser', function () {
     it('ne devrait pas être possible de procéder à un tirage au sort déjà finalisé', function () {
       // Given
-      const didier = new Participant('Didier')
-      const adrien = new Participant('Adrien')
+      const didier = new Participant('Didier', 33600000001)
+      const adrien = new Participant('Adrien', 33600000002)
 
       const familles = [
         new Famille('His', [didier]), new Famille('Saunier', [adrien])
       ]
-      const tirageAuSort = new TirageAuSort(familles)
+      const tirageAuSort = new TirageAuSort({ id: 1 }, familles)
 
       // When
       tirageAuSort.proceder()
