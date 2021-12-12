@@ -1,5 +1,7 @@
 import { Famille, Participant, Session } from '../../../api/gestionnaire/gestionnaire.entities'
-import { SessionSerializer } from '../../../api/gestionnaire/serializer'
+import { ParticipantSerializer, SessionSerializer } from '../../../api/gestionnaire/serializer'
+import { prisma } from '~/api/prisma'
+import cleanDb from '~/tests/api/clean_db'
 
 describe('Gestionnaire', () => {
   describe('Serializer', () => {
@@ -55,6 +57,30 @@ describe('Gestionnaire', () => {
               }]
             }
           ]
+        })
+      })
+    })
+
+    describe('Participant', function () {
+      describe('fromORM', function () {
+        afterEach(cleanDb)
+
+        it('retourne un Participant depuis le stockage en DB', async () => {
+          // Given
+          const participantInDb = await prisma.participant.create({
+            data: {
+              telephone: 1,
+              name: 'Adrien'
+            }
+          })
+
+          // When
+          const participant = ParticipantSerializer.fromORM(participantInDb)
+
+          // Then
+          expect(participant).toBeInstanceOf(Participant)
+          expect(participant.prenom).toEqual('Adrien')
+          expect(participant.telephone).toEqual(BigInt(1))
         })
       })
     })

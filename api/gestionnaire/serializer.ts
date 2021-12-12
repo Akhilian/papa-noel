@@ -1,6 +1,6 @@
 import { Famille, Participant, Session } from './gestionnaire.entities'
 
-const anonymiserNumeroDeTelephone = (numero: number) : string => {
+const anonymiserNumeroDeTelephone = (numero: number): string => {
   return String(numero).replace(/^(\d{8})/, '********')
 }
 
@@ -29,6 +29,12 @@ export const ParticipantSerializer = {
       prenom: participant.prenom,
       telephone: anonymiserNumeroDeTelephone(participant.telephone)
     }
+  },
+  fromORM (participant: any) {
+    return new Participant(
+      participant.name,
+      participant.telephone
+    )
   }
 }
 
