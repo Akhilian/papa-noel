@@ -36,14 +36,21 @@ router.post('/tirage-au-sort/:id/finaliser', async (_: Request, res: Response) =
     }
   })
 
+  const SMS_DEJA_ENVOYES = process.env.SMS_DEJA_ENVOYE || ''
+  const smsDejaEnvoyé = SMS_DEJA_ENVOYES.split(';').map(i => BigInt(i))
+
+  console.log(smsDejaEnvoyé)
+
   for (const duo of duos) {
-    try {
-      await SMS.envoyer(duo)
-      console.log(duo.participant)
-    } catch (error) {
-      console.error(error)
+    if (!smsDejaEnvoyé.includes(BigInt(duo.participant.telephone))) {
+      try {
+        await SMS.envoyer(duo)
+        console.log(duo.participant)
+      } catch (error) {
+        console.error(error)
+      }
+      await sleep(2000)
     }
-    await sleep(300)
   }
 
   return res.status(200).json({})
