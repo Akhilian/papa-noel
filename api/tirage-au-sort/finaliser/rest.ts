@@ -5,6 +5,10 @@ import { prisma } from '../../prisma'
 
 const router = Router()
 
+function sleep (ms: any) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 router.post('/tirage-au-sort/:id/finaliser', async (_: Request, res: Response) => {
   // FIXME: Migrer vers le repository
   const tirageAuSort = await prisma.tirageAuSort.findUnique({
@@ -35,9 +39,11 @@ router.post('/tirage-au-sort/:id/finaliser', async (_: Request, res: Response) =
   for (const duo of duos) {
     try {
       await SMS.envoyer(duo)
+      console.log(duo.participant)
     } catch (error) {
       console.error(error)
     }
+    await sleep(300)
   }
 
   return res.status(200).json({})
