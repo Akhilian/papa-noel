@@ -98,7 +98,7 @@ export class TirageAuSort {
     return resultat
   }
 
-  finaliser () {
+  finaliser () : void {
     this._estFinalisé = true
   }
 }

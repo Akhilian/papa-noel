@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express'
 import { getSession } from '../../gestionnaire/repository'
 import { sauvegarderTirageAuSort } from '../repository'
+import { TirageAuSortSerializer } from '../serializer'
 
 const router = Router()
 
@@ -18,7 +19,10 @@ router.post('/session/:id/tirage-au-sort', async (request: Request, res: Respons
   await sauvegarderTirageAuSort(tirageAuSort)
 
   res.status(200).json({
-    data: {}
+    data: TirageAuSortSerializer.toRest(tirageAuSort),
+    links: {
+      session: `/session/${tirageAuSort.sessionId.id}`
+    }
   })
 })
 

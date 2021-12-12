@@ -1,12 +1,14 @@
 import express, { Request, Response } from 'express'
-import tirageAuSortRouter from './tirage-au-sort/lancer/rest'
+import lancerTirageAuSortRouter from './tirage-au-sort/lancer/rest'
+import finaliserUnTirageAuSortRouter from './tirage-au-sort/finaliser/rest'
 import gestionnaireRouter from './gestionnaire/afficher-une-session/rest'
 const bodyParser = require('body-parser')
 const api = express()
 
 api.use(bodyParser.json())
 
-api.use('/', tirageAuSortRouter)
+api.use('/', lancerTirageAuSortRouter)
+api.use('/', finaliserUnTirageAuSortRouter)
 api.use('/', gestionnaireRouter)
 
 api.get('/resultat/adrien', (_: Request, res: Response) => {

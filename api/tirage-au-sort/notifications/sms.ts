@@ -1,8 +1,9 @@
 import { TransactionalSMSApi, TransactionalSMSApiApiKeys, SendTransacSms } from '@sendinblue/client'
+import { Duo } from '../tirageAuSort.entities'
 
 // FIXME Do not commit before testing correctly
 export class SMS {
-  public static envoyer () {
+  public static envoyer (duo: Duo) {
     const API_KEY = process.env.SMS_API_KEY || ''
 
     const apiInstance = new TransactionalSMSApi()
@@ -10,11 +11,11 @@ export class SMS {
 
     const sendTransacSms = new SendTransacSms()
     sendTransacSms.sender = 'PapaNoel'
-    sendTransacSms.recipient = ''
-    sendTransacSms.content = 'Papa Noel - Votre cadeau secret sera pour Catherine'
+    sendTransacSms.recipient = String(duo.participant.telephone)
+    sendTransacSms.content = `Hello ${duo.participant.prenom}. Pour le secret santa de la famille His, ton cadeau secret sera pour ${duo.beneficiaire.prenom}. Bisous, Adrien`
     sendTransacSms.webUrl = 'https://papa-noel.osc-fr1.scalingo.io/'
 
     // eslint-disable-next-line no-console
-    apiInstance.sendTransacSms(sendTransacSms).then(console.log, console.error)
+    return apiInstance.sendTransacSms(sendTransacSms)
   }
 }
