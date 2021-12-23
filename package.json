@@ -13,7 +13,9 @@
     "lint:js": "eslint --ext \".js,.vue,.ts\" --ignore-path .gitignore .",
     "lint": "yarn lint:js",
     "test": "jest",
-    "migrate:deploy": "prisma migrate deploy"
+    "test:coverage": "jest --coverage=true",
+    "migrate:deploy": "prisma migrate deploy",
+    "seed": "prisma db seed"
   },
   "dependencies": {
     "@nuxt/content": "^1.14.0",

@@ -16,9 +16,26 @@
       <Card>
         <Title>{{ nom }}</Title>
       </Card>
-      <FamilyCard v-for="famille in familles" :key="famille.nom" :nom="famille.nom">
-        {{ famille }}
-      </FamilyCard>
+      <div class="w-full">
+        <div class="shadow-lg rounded-md m-auto w-screen-md max-w-screen-md">
+          <FamilyCard
+            v-for="famille in familles"
+            :key="famille.nom"
+            :nom="famille.nom"
+            :participants="famille.participants"
+          >
+            {{ famille }}
+          </FamilyCard>
+          <div class="m-auto w-screen-md max-w-screen-md bg-gray-50 text-sm text-right rounded-b-lg p-2">
+            <button class="hover:text-gray-600 text-gray-500 font-bold py-2 px-4">
+              Cancel
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+              Invite
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,14 +48,29 @@ import FamilyCard from '~/components/Organisms/FamilyCard.vue'
 
 export default Vue.extend({
   name: 'PageAccueil',
-  components: { FamilyCard, Card, Title },
+  components: {
+    FamilyCard,
+    Card,
+    Title
+  },
 
-  async asyncData ({ $axios, $config, params }) {
-    const resultat = await $axios.$get($config.API_URL + `/session/${params.id}`)
+  async asyncData ({
+    $axios,
+    $config,
+    params
+  }) {
+    try {
+      const resultat = await $axios.$get($config.API_URL + `/session/${params.id}`)
 
-    return {
-      nom: resultat.data.nom,
-      familles: resultat.data.familles
+      return {
+        nom: resultat.data.nom,
+        familles: resultat.data.familles
+      }
+    } catch (error) {
+      return {
+        nom: 'Error',
+        familles: []
+      }
     }
   }
 })

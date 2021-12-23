@@ -23,7 +23,7 @@
           space-y-4
         "
       >
-        <Title> Administration </Title>
+        <Title>Administration</Title>
         <div>
           <p><strong>Nombre d'inscrits :</strong> 8</p>
           <p><strong>Statut du tirage au sort :</strong> En attente</p>
