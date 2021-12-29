@@ -13,11 +13,11 @@ describe('Tirage au sort - Repository', () => {
       await prisma.participant.createMany({
         data: [
           {
-            name: 'Didier',
+            prenom: 'Didier',
             telephone: 33600000001
           },
           {
-            name: 'Adrien',
+            prenom: 'Adrien',
             telephone: 33600000002
           }
         ]
@@ -76,10 +76,10 @@ describe('Tirage au sort - Repository', () => {
                 name: 'Saunier',
                 participants: {
                   create: [{
-                    name: 'Adrien',
+                    prenom: 'Adrien',
                     telephone: 1
                   }, {
-                    name: 'Catherine',
+                    prenom: 'Catherine',
                     telephone: 2
                   }]
                 }

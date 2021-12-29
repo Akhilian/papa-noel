@@ -49,7 +49,7 @@ describe('Tirage au sort', () => {
                 name: 'Saunier',
                 participants: {
                   create: [{
-                    name: 'Adrien',
+                    prenom: 'Adrien',
                     telephone: 33600000000
                   }]
                 }
@@ -57,7 +57,7 @@ describe('Tirage au sort', () => {
                 name: 'Varnier',
                 participants: {
                   create: [{
-                    name: 'Guillaume',
+                    prenom: 'Guillaume',
                     telephone: 33600000001
                   }]
                 }
@@ -90,7 +90,7 @@ describe('Tirage au sort', () => {
                 name: 'Saunier',
                 participants: {
                   create: [{
-                    name: 'Adrien',
+                    prenom: 'Adrien',
                     telephone: 33600000000
                   }]
                 }
@@ -98,7 +98,7 @@ describe('Tirage au sort', () => {
                 name: 'Varnier',
                 participants: {
                   create: [{
-                    name: 'Guillaume',
+                    prenom: 'Guillaume',
                     telephone: 33600000001
                   }]
                 }
@@ -176,10 +176,10 @@ describe('Tirage au sort', () => {
                   name: 'Saunier',
                   participants: {
                     create: [{
-                      name: 'Adrien',
+                      prenom: 'Adrien',
                       telephone: 1
                     }, {
-                      name: 'Catherine',
+                      prenom: 'Catherine',
                       telephone: 2
                     }]
                   }

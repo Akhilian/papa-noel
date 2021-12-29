@@ -37,7 +37,7 @@ model Duo {
 model Participant {
   telephone       BigInt   @id @unique
   email           String?  @unique
-  name            String
+  prenom          String
   Famille         Famille? @relation(fields: [familleId], references: [id])
   familleId       Int?
   participantDuo  Duo[]    @relation("participant")

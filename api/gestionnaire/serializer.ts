@@ -7,7 +7,7 @@ const anonymiserNumeroDeTelephone = (numero: number): string => {
 export const FamilleSerializer = {
   fromORM: (famille: any): Famille => {
     const listParticipants = famille.participants.map((participant: any) => {
-      return new Participant(participant.name, participant.telephone)
+      return new Participant(participant.prenom, participant.telephone)
     })
 
     return new Famille(
@@ -31,11 +31,15 @@ export const ParticipantSerializer = {
     }
   },
 
-  fromORM (participant: any) {
+  fromORM (participant: any) : Participant {
     return new Participant(
-      participant.name,
+      participant.prenom,
       Number(participant.telephone)
     )
+  },
+
+  fromRest ({ prenom, telephone }: any) : Participant {
+    return new Participant(prenom, Number(telephone))
   }
 }
 

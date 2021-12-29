@@ -70,7 +70,7 @@ describe('Gestionnaire', () => {
           const participantInDb = await prisma.participant.create({
             data: {
               telephone: 1,
-              name: 'Adrien'
+              prenom: 'Adrien'
             }
           })
 
@@ -81,6 +81,24 @@ describe('Gestionnaire', () => {
           expect(participant).toBeInstanceOf(Participant)
           expect(participant.prenom).toEqual('Adrien')
           expect(participant.telephone).toEqual(1)
+        })
+      })
+
+      describe('fromREST', () => {
+        it('devrait construire un participant', () => {
+          // Given
+          const json = {
+            telephone: '33600000000',
+            prenom: 'Adrien'
+          }
+
+          // When
+          const participant = ParticipantSerializer.fromRest(json)
+
+          // Then
+          expect(participant).toBeInstanceOf(Participant)
+          expect(participant.telephone).toEqual(33600000000)
+          expect(participant.prenom).toEqual('Adrien')
         })
       })
     })

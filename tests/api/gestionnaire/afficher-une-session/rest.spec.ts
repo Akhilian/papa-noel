@@ -73,7 +73,7 @@ describe('Gestionnaire', () => {
                   participants: {
                     create: [
                       {
-                        name: 'Adrien',
+                        prenom: 'Adrien',
                         telephone: 33600000000
                       }
                     ]

@@ -15,7 +15,7 @@ describe('Gestionnaire - Repository', () => {
           participants: {
             create: [
               {
-                name: 'Adrien',
+                prenom: 'Adrien',
                 telephone: 33600000000
               }
             ]
@@ -124,10 +124,10 @@ describe('Gestionnaire - Repository', () => {
               name: 'His',
               participants: {
                 create: [{
-                  name: 'Jean',
+                  prenom: 'Jean',
                   telephone: 33600000000
                 }, {
-                  name: 'Clémence',
+                  prenom: 'Clémence',
                   telephone: 33600000001
                 }]
               }

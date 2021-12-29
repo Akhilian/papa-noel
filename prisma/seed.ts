@@ -12,23 +12,23 @@ const sessionData: Prisma.SessionCreateInput = {
         participants: {
           create: [
             {
-              name: 'Adrien',
+              prenom: 'Adrien',
               telephone: 0
             },
             {
-              name: 'Pauline',
+              prenom: 'Pauline',
               telephone: 1
             },
             {
-              name: 'Alix',
+              prenom: 'Alix',
               telephone: 2
             },
             {
-              name: 'Catherine',
+              prenom: 'Catherine',
               telephone: 3
             },
             {
-              name: 'Frédéric',
+              prenom: 'Frédéric',
               telephone: 4
             }
           ]
