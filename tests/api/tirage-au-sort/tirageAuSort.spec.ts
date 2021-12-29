@@ -80,7 +80,7 @@ describe('Tirage au sort', () => {
       const didier = new Participant('Didier', 33600000001)
       const patricia = new Participant('Patricia', 33600000002)
       const adrien = new Participant('Adrien', 33600000003)
-      const alix = new Participant('Alix', 33600000003)
+      const alix = new Participant('Alix', 33600000004)
 
       const familles = [
         new Famille('Saunier', [adrien, alix]), new Famille('His', [didier, patricia])
@@ -115,6 +115,33 @@ describe('Tirage au sort', () => {
       // Then
       expect(resultat.pour(adrien)).toBe(alix)
       expect(resultat.pour(alix)).toBe(adrien)
+    })
+
+    it('permet de trouver le résultat pour un participant à partir du téléphone', () => {
+      // Given
+      const familles = [
+        new Famille(
+          'His',
+          [new Participant('Didier', 33600000001)]
+        ),
+        new Famille(
+          'Saunier',
+          [new Participant('Adrien', 33600000002)]
+        )
+      ]
+
+      // When
+      const tirageAuSort = new TirageAuSort(
+        { id: 1 }, familles
+      )
+      tirageAuSort.proceder()
+
+      // Then
+      const resultat = tirageAuSort.resultat
+      expect(resultat?.pour(new Participant('Didier', 33600000001)))
+        .toEqual(new Participant('Adrien', 33600000002))
+      expect(resultat?.pour(new Participant('Adrien', 33600000002)))
+        .toEqual(new Participant('Didier', 33600000001))
     })
   })
 

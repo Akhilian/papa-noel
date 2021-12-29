@@ -4,9 +4,9 @@ import { prisma } from '~/api/prisma'
 import cleanDb from '~/tests/api/clean_db'
 
 describe('Gestionnaire', () => {
-  describe('Afficher la session', () => {
-    afterEach(cleanDb)
+  afterEach(cleanDb)
 
+  describe('Afficher la session', () => {
     describe('Interface REST', () => {
       it('retourne 404 quand la session n’est pas trouvé', async () => {
         // When

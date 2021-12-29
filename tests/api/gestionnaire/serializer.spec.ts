@@ -80,7 +80,7 @@ describe('Gestionnaire', () => {
           // Then
           expect(participant).toBeInstanceOf(Participant)
           expect(participant.prenom).toEqual('Adrien')
-          expect(participant.telephone).toEqual(BigInt(1))
+          expect(participant.telephone).toEqual(1)
         })
       })
     })

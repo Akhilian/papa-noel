@@ -30,10 +30,11 @@ export const ParticipantSerializer = {
       telephone: anonymiserNumeroDeTelephone(participant.telephone)
     }
   },
+
   fromORM (participant: any) {
     return new Participant(
       participant.name,
-      participant.telephone
+      Number(participant.telephone)
     )
   }
 }

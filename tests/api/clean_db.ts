@@ -1,11 +1,13 @@
 import { prisma } from '~/api/prisma'
 
 const cleanDb = async () => {
-  await prisma.duo.deleteMany({})
-  await prisma.tirageAuSort.deleteMany({})
-  await prisma.participant.deleteMany({})
-  await prisma.famille.deleteMany({})
-  await prisma.session.deleteMany({})
+  await prisma.$transaction([
+    prisma.duo.deleteMany(),
+    prisma.tirageAuSort.deleteMany(),
+    prisma.participant.deleteMany(),
+    prisma.famille.deleteMany(),
+    prisma.session.deleteMany()
+  ])
 }
 
 export default cleanDb

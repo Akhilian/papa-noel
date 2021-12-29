@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white border-b">
     <div class="p-4" :class="{ 'border-l-4 border-green-500': !estMasque }">
-      <Title @click.native="toggle" class="cursor-pointer">
+      <Title class="cursor-pointer" @click.native="toggle">
         {{ nom }}
       </Title>
       <ul class="py-2" :class="{ hidden: estMasque }">

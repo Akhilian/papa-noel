@@ -1,6 +1,6 @@
 import { prisma } from '~/api/prisma'
-import { sauvegarderTirageAuSort } from '~/api/tirage-au-sort/repository'
-import { TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
+import { recupererTirageAuSort, sauvegarderTirageAuSort } from '~/api/tirage-au-sort/repository'
+import { Resultat, TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
 import { Famille, Participant } from '~/api/gestionnaire/gestionnaire.entities'
 import cleanDb from '~/tests/api/clean_db'
 
@@ -12,8 +12,14 @@ describe('Tirage au sort - Repository', () => {
       // Given
       await prisma.participant.createMany({
         data: [
-          { name: 'Didier', telephone: 33600000001 },
-          { name: 'Adrien', telephone: 33600000002 }
+          {
+            name: 'Didier',
+            telephone: 33600000001
+          },
+          {
+            name: 'Adrien',
+            telephone: 33600000002
+          }
         ]
       })
       const sessionInDb = await prisma.session.create({
@@ -46,6 +52,75 @@ describe('Tirage au sort - Repository', () => {
       })
       expect(tirageAuSortInDb).toHaveLength(1)
       expect(tirageAuSortInDb[0].duos).toHaveLength(2)
+    })
+  })
+
+  describe('recupererTirageAuSort', () => {
+    it('devrait renvoyer null quand le tirage au sort n’existe pas', async () => {
+      // Given
+      // When
+      const result = await recupererTirageAuSort(-1)
+
+      // Then
+      expect(result).toEqual(null)
+    })
+
+    it('devrait retourner une instance de TirageAuSort', async () => {
+      // Given
+      const session = await prisma.session.create({
+        data: {
+          name: 'Session',
+          familles: {
+            create: [
+              {
+                name: 'Saunier',
+                participants: {
+                  create: [{
+                    name: 'Adrien',
+                    telephone: 1
+                  }, {
+                    name: 'Catherine',
+                    telephone: 2
+                  }]
+                }
+              }
+            ]
+          },
+          tirages: {
+            create: [{
+              duos: {
+                create: [
+                  {
+                    participantId: 1,
+                    beneficiaireId: 2
+                  },
+                  {
+                    participantId: 2,
+                    beneficiaireId: 1
+                  }
+                ]
+              }
+            }]
+          }
+        },
+        include: {
+          tirages: true
+        }
+      })
+
+      // When
+      const tirageAuSort = await recupererTirageAuSort(session.tirages[0].id)
+
+      // Then
+      expect(tirageAuSort).toBeInstanceOf(TirageAuSort)
+      expect(tirageAuSort?.sessionId).toEqual({ id: session.id })
+
+      const resultatDuTirageAuSort = tirageAuSort?.resultat
+      expect(resultatDuTirageAuSort).toBeInstanceOf(Resultat)
+      expect(resultatDuTirageAuSort?.pour(new Participant('Adrien', 1)))
+        .toEqual(new Participant('Catherine', 2))
+      expect(resultatDuTirageAuSort?.pour(new Participant('Catherine', 2)))
+        .toEqual(new Participant('Adrien', 1))
     })
   })
 })

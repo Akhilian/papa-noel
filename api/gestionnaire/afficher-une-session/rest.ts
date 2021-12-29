@@ -1,10 +1,8 @@
-import { Request, Response, Router } from 'express'
+import { Request, Response } from 'express'
 import { getSession } from '../repository'
 import { SessionSerializer } from '../serializer'
 
-const router = Router()
-
-router.get('/session/:id', async (request: Request, res: Response) => {
+export const afficherUneSession = async (request: Request, res: Response) => {
   const id = request.params.id
 
   const session = await getSession(Number(id))
@@ -20,6 +18,4 @@ router.get('/session/:id', async (request: Request, res: Response) => {
       self: `/session/${id}`
     }
   })
-})
-
-export default router
+}

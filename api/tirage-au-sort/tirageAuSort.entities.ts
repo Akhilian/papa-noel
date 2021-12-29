@@ -13,7 +13,7 @@ export class Resultat {
   }
 
   pour (participant: Participant) {
-    const tuple = this.resultat.find(tuple => tuple.participant === participant)
+    const tuple = this.resultat.find(tuple => tuple.participant.telephone === participant.telephone)
     return tuple?.beneficiaire
   }
 }
@@ -25,8 +25,8 @@ export class TirageAuSort {
   private _estFinalisé: boolean
   sessionId: SessionId
 
-  constructor (sessionId: SessionId, familles: Array<Famille>, shuffle?: Function) {
-    this._resultat = undefined
+  constructor (sessionId: SessionId, familles: Array<Famille>, shuffle?: Function, resultat?: Resultat) {
+    this._resultat = resultat
     this._estFinalisé = false
     this.sessionId = sessionId
 
@@ -43,7 +43,7 @@ export class TirageAuSort {
     return this._resultat
   }
 
-  proceder () {
+  proceder (): Resultat {
     if (this._estFinalisé) {
       throw new Error('Impossible de procéder, le tirage au sort a été finalisé.')
     }

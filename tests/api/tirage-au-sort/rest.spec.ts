@@ -220,21 +220,21 @@ describe('Tirage au sort', () => {
         expect(SMS.envoyer).toHaveBeenCalledWith({
           beneficiaire: {
             prenom: 'Catherine',
-            telephone: BigInt(2)
+            telephone: 2
           },
           participant: {
             prenom: 'Adrien',
-            telephone: BigInt(1)
+            telephone: 1
           }
         })
         expect(SMS.envoyer).toHaveBeenCalledWith({
           beneficiaire: {
             prenom: 'Adrien',
-            telephone: BigInt(1)
+            telephone: 1
           },
           participant: {
             prenom: 'Catherine',
-            telephone: BigInt(2)
+            telephone: 2
           }
         })
       })

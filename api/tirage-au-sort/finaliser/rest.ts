@@ -1,15 +1,13 @@
-import { Request, Response, Router } from 'express'
+import { Request, Response } from 'express'
 import { SMS } from '../notifications/sms'
 import { ParticipantSerializer } from '../../gestionnaire/serializer'
 import { prisma } from '../../prisma'
-
-const router = Router()
 
 function sleep (ms: any) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-router.post('/tirage-au-sort/:id/finaliser', async (_: Request, res: Response) => {
+export const finaliserTirageAuSort = async (_: Request, res: Response) => {
   // FIXME: Migrer vers le repository
   const tirageAuSort = await prisma.tirageAuSort.findUnique({
     where: {
@@ -39,14 +37,12 @@ router.post('/tirage-au-sort/:id/finaliser', async (_: Request, res: Response) =
   const SMS_DEJA_ENVOYES = process.env.SMS_DEJA_ENVOYE || ''
   const smsDejaEnvoyé = SMS_DEJA_ENVOYES.split(';').map(i => BigInt(i))
 
-  console.log(smsDejaEnvoyé)
-
   for (const duo of duos) {
     if (!smsDejaEnvoyé.includes(BigInt(duo.participant.telephone))) {
       try {
         await SMS.envoyer(duo)
-        console.log(duo.participant)
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(error)
       }
       await sleep(2000)
@@ -54,6 +50,4 @@ router.post('/tirage-au-sort/:id/finaliser', async (_: Request, res: Response) =
   }
 
   return res.status(200).json({})
-})
-
-export default router
+}

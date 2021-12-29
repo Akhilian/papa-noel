@@ -19,8 +19,8 @@ model Session {
 
 model TirageAuSort {
   id        Int      @id @default(autoincrement())
-  Session   Session? @relation(fields: [sessionId], references: [id])
-  sessionId Int?
+  Session   Session @relation(fields: [sessionId], references: [id])
+  sessionId Int
   duos      Duo[]
 }
 
