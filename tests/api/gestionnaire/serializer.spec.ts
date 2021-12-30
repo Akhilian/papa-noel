@@ -69,7 +69,7 @@ describe('Gestionnaire', () => {
           // Given
           const participantInDb = await prisma.participant.create({
             data: {
-              telephone: 1,
+              telephone: 33600000001,
               prenom: 'Adrien'
             }
           })
@@ -80,7 +80,7 @@ describe('Gestionnaire', () => {
           // Then
           expect(participant).toBeInstanceOf(Participant)
           expect(participant.prenom).toEqual('Adrien')
-          expect(participant.telephone).toEqual(1)
+          expect(participant.telephone).toEqual(33600000001)
         })
       })
 

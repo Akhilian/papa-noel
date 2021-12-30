@@ -177,10 +177,10 @@ describe('Tirage au sort', () => {
                   participants: {
                     create: [{
                       prenom: 'Adrien',
-                      telephone: 1
+                      telephone: 33600000001
                     }, {
                       prenom: 'Catherine',
-                      telephone: 2
+                      telephone: 33600000002
                     }]
                   }
                 }
@@ -191,12 +191,12 @@ describe('Tirage au sort', () => {
                 duos: {
                   create: [
                     {
-                      participantId: 1,
-                      beneficiaireId: 2
+                      participantId: 33600000001,
+                      beneficiaireId: 33600000002
                     },
                     {
-                      participantId: 2,
-                      beneficiaireId: 1
+                      participantId: 33600000002,
+                      beneficiaireId: 33600000001
                     }
                   ]
                 }
@@ -220,21 +220,21 @@ describe('Tirage au sort', () => {
         expect(SMS.envoyer).toHaveBeenCalledWith({
           beneficiaire: {
             prenom: 'Catherine',
-            telephone: 2
+            telephone: 33600000002
           },
           participant: {
             prenom: 'Adrien',
-            telephone: 1
+            telephone: 33600000001
           }
         })
         expect(SMS.envoyer).toHaveBeenCalledWith({
           beneficiaire: {
             prenom: 'Adrien',
-            telephone: 1
+            telephone: 33600000001
           },
           participant: {
             prenom: 'Catherine',
-            telephone: 2
+            telephone: 33600000002
           }
         })
       })

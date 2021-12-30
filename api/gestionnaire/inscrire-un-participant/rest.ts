@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { getSession } from '~/api/gestionnaire/repository'
+import { ParticipantSerializer } from '~/api/gestionnaire/serializer'
 
 export const inscrireUnParticipant = async (request: Request, res: Response) => {
   const id = Number(request.params.id)
@@ -10,10 +11,19 @@ export const inscrireUnParticipant = async (request: Request, res: Response) => 
     return res.status(404).json({})
   }
 
-  res.status(400).json({
-    errors: [
-      { title: 'Le champ telephone est obligatoire' },
-      { title: 'Le champ prenom est obligatoire' }
-    ]
-  })
+  const telephone = request.body.telephone
+  const prenom = request.body.prenom
+
+  try {
+    ParticipantSerializer.fromRest({
+      prenom,
+      telephone
+    })
+  } catch (error) {
+    res.status(400).json({
+      errors: [
+        { title: error.message }
+      ]
+    })
+  }
 }

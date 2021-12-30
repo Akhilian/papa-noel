@@ -77,10 +77,10 @@ describe('Tirage au sort - Repository', () => {
                 participants: {
                   create: [{
                     prenom: 'Adrien',
-                    telephone: 1
+                    telephone: 33600000001
                   }, {
                     prenom: 'Catherine',
-                    telephone: 2
+                    telephone: 33600000002
                   }]
                 }
               }
@@ -91,12 +91,12 @@ describe('Tirage au sort - Repository', () => {
               duos: {
                 create: [
                   {
-                    participantId: 1,
-                    beneficiaireId: 2
+                    participantId: 33600000001,
+                    beneficiaireId: 33600000002
                   },
                   {
-                    participantId: 2,
-                    beneficiaireId: 1
+                    participantId: 33600000002,
+                    beneficiaireId: 33600000001
                   }
                 ]
               }
@@ -117,10 +117,10 @@ describe('Tirage au sort - Repository', () => {
 
       const resultatDuTirageAuSort = tirageAuSort?.resultat
       expect(resultatDuTirageAuSort).toBeInstanceOf(Resultat)
-      expect(resultatDuTirageAuSort?.pour(new Participant('Adrien', 1)))
-        .toEqual(new Participant('Catherine', 2))
-      expect(resultatDuTirageAuSort?.pour(new Participant('Catherine', 2)))
-        .toEqual(new Participant('Adrien', 1))
+      expect(resultatDuTirageAuSort?.pour(new Participant('Adrien', 33600000001)))
+        .toEqual(new Participant('Catherine', 33600000002))
+      expect(resultatDuTirageAuSort?.pour(new Participant('Catherine', 33600000002)))
+        .toEqual(new Participant('Adrien', 33600000001))
     })
   })
 })

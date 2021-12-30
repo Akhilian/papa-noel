@@ -8,6 +8,20 @@ export class Participant {
   constructor (prenom: string, telephone: number) {
     this.prenom = prenom
     this.telephone = telephone
+
+    this.validate()
+  }
+
+  private validate () {
+    if (!this.prenom) {
+      throw new Error('Le champ prénom est obligatoire')
+    }
+
+    const formatTelephoneValide = /^33\d{9}$/
+
+    if (!this.telephone || !formatTelephoneValide.test(String(this.telephone))) {
+      throw new Error('Le champ téléphone est obligatoire et doit être valide')
+    }
   }
 }
 

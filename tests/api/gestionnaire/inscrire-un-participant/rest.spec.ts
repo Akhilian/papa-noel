@@ -1,6 +1,5 @@
 import supertest from 'supertest'
 import api from '~/api'
-/* import { prisma } from '~/api/prisma' */
 import cleanDb from '~/tests/api/clean_db'
 import { prisma } from '~/api/prisma'
 
@@ -31,8 +30,31 @@ describe('Gestionnaire', () => {
           .expect((res) => {
             expect(res.body).toEqual({
               errors: [
-                { title: 'Le champ telephone est obligatoire' },
-                { title: 'Le champ prenom est obligatoire' }
+                { title: 'Le champ prénom est obligatoire' }
+              ]
+            })
+          })
+          .expect(400)
+      })
+
+      it('retourne 400 quand la session n’existe mais le telephone est manquant', async () => {
+        // Given
+        const sessionInDb = await prisma.session.create({
+          data: {
+            name: 'Nouvelle session'
+          }
+        })
+
+        // When
+        await supertest(api)
+          .post(`/session/${sessionInDb.id}/participant`)
+          .send({
+            prenom: 'Adrien'
+          })
+          .expect((res) => {
+            expect(res.body).toEqual({
+              errors: [
+                { title: 'Le champ téléphone est obligatoire et doit être valide' }
               ]
             })
           })
