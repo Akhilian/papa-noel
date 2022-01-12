@@ -21,7 +21,7 @@
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
-    "@prisma/client": "3.7.0",
+    "@prisma/client": "3.8.0",
     "@sendinblue/client": "^3.0.1",
     "body-parser": "^1.19.1",
     "core-js": "^3.20.1",
