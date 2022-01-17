@@ -24,7 +24,7 @@
     "@prisma/client": "3.8.1",
     "@sendinblue/client": "^3.0.1",
     "body-parser": "^1.19.1",
-    "core-js": "^3.20.1",
+    "core-js": "^3.20.3",
     "express": "^4.17.2",
     "nuxt": "^2.15.7"
   },
