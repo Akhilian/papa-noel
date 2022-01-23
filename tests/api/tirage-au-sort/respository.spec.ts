@@ -1,10 +1,16 @@
 import { prisma } from '~/api/prisma'
-import { recupererTirageAuSort, sauvegarderTirageAuSort } from '~/api/tirage-au-sort/repository'
+import { TirageAuSortRepository } from '~/api/tirage-au-sort/repository'
 import { Resultat, TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
 import { Famille, Participant } from '~/api/gestionnaire/gestionnaire.entities'
 import cleanDb from '~/tests/api/clean_db'
 
 describe('Tirage au sort - Repository', () => {
+  let tirageAuSortRepository: TirageAuSortRepository
+
+  beforeEach(() => {
+    tirageAuSortRepository = new TirageAuSortRepository()
+  })
+
   afterEach(cleanDb)
 
   describe('sauvegarderTirageAuSort', function () {
@@ -39,7 +45,7 @@ describe('Tirage au sort - Repository', () => {
       tirageAuSort.proceder()
 
       // When
-      await sauvegarderTirageAuSort(tirageAuSort)
+      await tirageAuSortRepository.sauvegarderTirageAuSort(tirageAuSort)
 
       // Then
       const tirageAuSortInDb = await prisma.tirageAuSort.findMany({
@@ -59,7 +65,7 @@ describe('Tirage au sort - Repository', () => {
     it('devrait renvoyer null quand le tirage au sort n’existe pas', async () => {
       // Given
       // When
-      const result = await recupererTirageAuSort(-1)
+      const result = await tirageAuSortRepository.recupererTirageAuSort(-1)
 
       // Then
       expect(result).toEqual(null)
@@ -109,7 +115,7 @@ describe('Tirage au sort - Repository', () => {
       })
 
       // When
-      const tirageAuSort = await recupererTirageAuSort(session.tirages[0].id)
+      const tirageAuSort = await tirageAuSortRepository.recupererTirageAuSort(session.tirages[0].id)
 
       // Then
       expect(tirageAuSort).toBeInstanceOf(TirageAuSort)

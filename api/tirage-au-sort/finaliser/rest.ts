@@ -1,14 +1,14 @@
 import { Request, Response } from 'express'
 import { SMS } from '../notifications/sms'
 import { ParticipantSerializer } from '../../gestionnaire/serializer'
-import { recupererTirageAuSort } from '../repository'
+import { TirageAuSortRepository } from '../repository'
 
 function sleep (ms: any) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export const finaliserTirageAuSort = async (_: Request, res: Response) => {
-  const tirageAuSort = await recupererTirageAuSort(Number(_.params.id))
+  const tirageAuSort = await new TirageAuSortRepository().recupererTirageAuSort(Number(_.params.id))
 
   if (!tirageAuSort) {
     return res.status(404).json()

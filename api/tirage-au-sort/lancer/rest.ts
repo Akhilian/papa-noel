@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { GestionnaireRepository } from '../../gestionnaire/repository'
-import { sauvegarderTirageAuSort } from '../repository'
+import { TirageAuSortRepository } from '../repository'
 import { TirageAuSortSerializer } from '../serializer'
 
 export const lancerTirageAuSort = async (request: Request, res: Response) => {
@@ -14,7 +14,7 @@ export const lancerTirageAuSort = async (request: Request, res: Response) => {
   const tirageAuSort = session.initierUnTirageAuSort()
   tirageAuSort.proceder()
 
-  await sauvegarderTirageAuSort(tirageAuSort)
+  await new TirageAuSortRepository().sauvegarderTirageAuSort(tirageAuSort)
 
   res.status(200).json({
     data: TirageAuSortSerializer.toRest(tirageAuSort),
