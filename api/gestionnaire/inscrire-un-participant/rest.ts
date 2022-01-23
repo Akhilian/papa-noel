@@ -1,11 +1,12 @@
 import { Request, Response } from 'express'
-import { getSession } from '~/api/gestionnaire/repository'
+import { GestionnaireRepository } from '~/api/gestionnaire/repository'
 import { ParticipantSerializer } from '~/api/gestionnaire/serializer'
 
 export const inscrireUnParticipant = async (request: Request, res: Response) => {
   const id = Number(request.params.id)
 
-  const session = await getSession(id)
+  const gestionnaireRepository = new GestionnaireRepository()
+  const session = await gestionnaireRepository.getSession(id)
 
   if (session === undefined) {
     return res.status(404).json({})

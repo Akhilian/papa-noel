@@ -1,9 +1,15 @@
 import { prisma } from '~/api/prisma'
 import { Famille, Session } from '~/api/gestionnaire/gestionnaire.entities'
-import { getFamille, getSession } from '~/api/gestionnaire/repository'
+import { GestionnaireRepository } from '~/api/gestionnaire/repository'
 import cleanDb from '~/tests/api/clean_db'
 
 describe('Gestionnaire - Repository', () => {
+  let gestionnaireRepository: GestionnaireRepository
+
+  beforeEach(() => {
+    gestionnaireRepository = new GestionnaireRepository()
+  })
+
   afterEach(cleanDb)
 
   describe('get Famille', () => {
@@ -24,7 +30,7 @@ describe('Gestionnaire - Repository', () => {
       })
 
       // When
-      const famille = await getFamille(familleInDb.id)
+      const famille = await gestionnaireRepository.getFamille(familleInDb.id)
 
       // Then
       expect(famille).toBeDefined()
@@ -35,7 +41,7 @@ describe('Gestionnaire - Repository', () => {
 
     it('devrait retourner undefined quand la famille n’existe pas', async () => {
       // When
-      const famille = await getFamille(-1)
+      const famille = await gestionnaireRepository.getFamille(-1)
 
       // Then
       expect(famille).toBe(undefined)
@@ -45,7 +51,7 @@ describe('Gestionnaire - Repository', () => {
   describe('Session', () => {
     it('devrait retourner undefined quand la session n’existe pas', async function () {
       // When
-      const famille = await getSession(-1)
+      const famille = await gestionnaireRepository.getSession(-1)
 
       // Then
       expect(famille).not.toBeDefined()
@@ -60,7 +66,7 @@ describe('Gestionnaire - Repository', () => {
       })
 
       // When
-      const famille = await getSession(sessionInDb.id)
+      const famille = await gestionnaireRepository.getSession(sessionInDb.id)
 
       // Then
       expect(famille).toBeDefined()
@@ -83,7 +89,7 @@ describe('Gestionnaire - Repository', () => {
       })
 
       // When
-      const session = await getSession(sessionInDb.id)
+      const session = await gestionnaireRepository.getSession(sessionInDb.id)
 
       // Then
       expect(session).toBeDefined()
@@ -106,7 +112,7 @@ describe('Gestionnaire - Repository', () => {
       })
 
       // When
-      const session = await getSession(sessionInDb.id)
+      const session = await gestionnaireRepository.getSession(sessionInDb.id)
 
       // Then
       expect(session).toBeDefined()
@@ -137,7 +143,7 @@ describe('Gestionnaire - Repository', () => {
       })
 
       // When
-      const session = await getSession(sessionInDb.id)
+      const session = await gestionnaireRepository.getSession(sessionInDb.id)
 
       // Then
       expect(session).toBeDefined()

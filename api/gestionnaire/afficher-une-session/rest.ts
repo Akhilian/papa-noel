@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
-import { getSession } from '../repository'
+import { GestionnaireRepository } from '../repository'
 import { SessionSerializer } from '../serializer'
 
 export const afficherUneSession = async (request: Request, res: Response) => {
   const id = request.params.id
 
-  const session = await getSession(Number(id))
+  const session = await new GestionnaireRepository().getSession(Number(id))
 
   if (!session) {
     return res.status(404).json()
