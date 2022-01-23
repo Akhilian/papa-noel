@@ -1,38 +1,28 @@
 import { Request, Response } from 'express'
 import { SMS } from '../notifications/sms'
 import { ParticipantSerializer } from '../../gestionnaire/serializer'
-import { prisma } from '../../prisma'
+import { recupererTirageAuSort } from '../repository'
 
 function sleep (ms: any) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export const finaliserTirageAuSort = async (_: Request, res: Response) => {
-  // FIXME: Migrer vers le repository
-  const tirageAuSort = await prisma.tirageAuSort.findUnique({
-    where: {
-      id: Number(_.params.id)
-    },
-    include: {
-      duos: {
-        include: {
-          participant: true,
-          beneficiaire: true
-        }
-      }
-    }
-  })
+  const tirageAuSort = await recupererTirageAuSort(Number(_.params.id))
 
   if (!tirageAuSort) {
     return res.status(404).json()
   }
 
-  const duos = tirageAuSort?.duos.map((duo) => {
+  const resultatTirageAuSort = tirageAuSort.resultat?.resultat
+  const duos = resultatTirageAuSort?.map((duo) => {
     return {
       participant: ParticipantSerializer.fromORM(duo.participant),
       beneficiaire: ParticipantSerializer.fromORM(duo.beneficiaire)
     }
   })
+
+  if (!duos) { return }
 
   const SMS_DEJA_ENVOYES = process.env.SMS_DEJA_ENVOYE || ''
   const smsDejaEnvoyé = SMS_DEJA_ENVOYES.split(';').map(i => BigInt(i))
