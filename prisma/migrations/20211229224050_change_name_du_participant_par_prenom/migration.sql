@@ -6,5 +6,4 @@
 
 */
 -- AlterTable
-ALTER TABLE "Participant" DROP COLUMN "name",
-ADD COLUMN     "prenom" TEXT NOT NULL;
+ALTER TABLE "Participant" RENAME COLUMN "name" TO prenom;
