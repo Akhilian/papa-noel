@@ -1965,10 +1965,10 @@
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f.tgz#4479099b99f6a082ce5843ee7208943ccedd127f"
   integrity sha512-bHYubuItSN/DGYo36aDu7xJiJmK52JOSHs4MK+KbceAtwS20BCWadRgtpQ3iZ2EXfN/B1T0iCXlNraaNwnpU2w==
 
-"@sendinblue/client@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@sendinblue/client/-/client-3.0.1.tgz#24e3e92f7d8de4dafc2ef43f095edbb2f1811d22"
-  integrity sha512-b1MIqSecq34vNzCruolL2db6xwr+NBW1cyWKgFity+CQeOrrQ8cuKYFLPGo7P0gTTi23dU6zmcoEvVHGZHoqxg==
+"@sendinblue/client@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@sendinblue/client/-/client-3.1.0.tgz#641e29348edbcf33acfef3fe6f25c68daebe368f"
+  integrity sha512-tt0pkPTTk2fy+K5h04Q8rQ80OW1YXosvIiwrO9yrdYNYK4WpBeJ/4bN00Z7uKl0NfKvRMVJk2JjqJi2g7QtArA==
   dependencies:
     bluebird "^3.5.0"
     lodash "^4.17.21"
