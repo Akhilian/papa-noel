@@ -86,6 +86,10 @@ From within the container, connect to the docker database using :
 
 ### Seeding the database
 
+To run the migrations
+
+    npx prisma migrate dev
+
 To generate the data
 
-  npx prisma db seed
+    npx prisma db seed
