@@ -1,4 +1,4 @@
-import { TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
+import { TirageAuSort } from '~/api/tirage-au-sort/domain/models/tirageAuSort'
 import { Participant } from '~/api/gestionnaire/domain/models/participant'
 import { Famille } from '~/api/gestionnaire/domain/models/famille'
 

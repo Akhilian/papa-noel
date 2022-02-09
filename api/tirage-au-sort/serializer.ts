@@ -1,6 +1,7 @@
-import { Duo, Resultat, TirageAuSort } from './tirageAuSort.entities'
+import { TirageAuSort } from './domain/models/tirageAuSort'
 import { ParticipantSerializer } from '~/api/gestionnaire/serializer'
 import { Famille } from '~/api/gestionnaire/domain/models/famille'
+import { Duo, Resultat } from '~/api/tirage-au-sort/domain/models/resultat'
 
 export const TirageAuSortSerializer = {
   toRest: (tirageAuSort: TirageAuSort) => {

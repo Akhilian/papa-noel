@@ -1,5 +1,5 @@
 import { TransactionalSMSApi, TransactionalSMSApiApiKeys, SendTransacSms } from '@sendinblue/client'
-import { Duo } from '../tirageAuSort.entities'
+import { Duo } from '~/api/tirage-au-sort/domain/models/resultat'
 
 // FIXME Do not commit before testing correctly
 export class SMS {

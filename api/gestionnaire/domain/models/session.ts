@@ -1,4 +1,4 @@
-import { TirageAuSort } from '../../../tirage-au-sort/tirageAuSort.entities'
+import { TirageAuSort } from '../../../tirage-au-sort/domain/models/tirageAuSort'
 import { melange } from '../../../tirage-au-sort/melange'
 import { Famille } from '~/api/gestionnaire/domain/models/famille'
 import { Aggregate } from '~/api/ddd-utils/domain/aggregate'

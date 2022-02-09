@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { SMS } from '../notifications/sms'
 import { ParticipantSerializer } from '../../gestionnaire/serializer'
-import { TirageAuSortRepository } from '../repository'
+import { TirageAuSortRepository } from '../infrastructure/repository/repository'
 
 function sleep (ms: any) {
   return new Promise(resolve => setTimeout(resolve, ms))

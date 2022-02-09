@@ -1,12 +1,8 @@
-import { prisma } from '../prisma'
-import { Duo, TirageAuSort } from './tirageAuSort.entities'
+import { prisma } from '../../../prisma'
+import { TirageAuSort } from '../../domain/models/tirageAuSort'
 import { TirageAuSortSerializer } from '~/api/tirage-au-sort/serializer'
-
-abstract class InterfaceTirageAuSortRepository {
-  abstract sauvegarderTirageAuSort (tirageAuSort: TirageAuSort): Promise<null>
-
-  abstract recupererTirageAuSort (id: number): Promise<null | TirageAuSort>
-}
+import { Duo } from '~/api/tirage-au-sort/domain/models/resultat'
+import { InterfaceTirageAuSortRepository } from '~/api/tirage-au-sort/domain/repository'
 
 export class TirageAuSortRepository implements InterfaceTirageAuSortRepository {
   async sauvegarderTirageAuSort (tirageAuSort: TirageAuSort): Promise<null> {

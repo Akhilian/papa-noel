@@ -1,24 +1,7 @@
-import { SessionId } from '../gestionnaire/domain/models/session'
+import { SessionId } from '../../../gestionnaire/domain/models/session'
 import { Participant } from '~/api/gestionnaire/domain/models/participant'
 import { Famille } from '~/api/gestionnaire/domain/models/famille'
-
-export type Duo = {
-  participant: Participant,
-  beneficiaire: Participant,
-}
-
-export class Resultat {
-  resultat: Array<Duo>
-
-  constructor (resultat: Array<Duo>) {
-    this.resultat = resultat
-  }
-
-  pour (participant: Participant) {
-    const tuple = this.resultat.find(tuple => tuple.participant.telephone === participant.telephone)
-    return tuple?.beneficiaire
-  }
-}
+import { Duo, Resultat } from '~/api/tirage-au-sort/domain/models/resultat'
 
 export class TirageAuSort {
   private familles: Array<Famille>

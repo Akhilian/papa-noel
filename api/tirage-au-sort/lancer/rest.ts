@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { GestionnaireRepository } from '../../gestionnaire/infrastructure/repository'
-import { TirageAuSortRepository } from '../repository'
+import { TirageAuSortRepository } from '../infrastructure/repository/repository'
 import { TirageAuSortSerializer } from '../serializer'
 
 export const lancerTirageAuSort = async (request: Request, res: Response) => {
