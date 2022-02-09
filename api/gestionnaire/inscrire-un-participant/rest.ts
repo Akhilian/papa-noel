@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { GestionnaireRepository } from '~/api/gestionnaire/repository'
+import { GestionnaireRepository } from '~/api/gestionnaire/infrastructure/repository'
 import { ParticipantSerializer } from '~/api/gestionnaire/serializer'
 
 export const inscrireUnParticipant = async (request: Request, res: Response) => {

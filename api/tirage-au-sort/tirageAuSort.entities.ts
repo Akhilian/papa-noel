@@ -1,4 +1,6 @@
-import { Famille, Participant, SessionId } from '../gestionnaire/gestionnaire.entities'
+import { SessionId } from '../gestionnaire/domain/models/session'
+import { Participant } from '~/api/gestionnaire/domain/models/participant'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
 
 export type Duo = {
   participant: Participant,

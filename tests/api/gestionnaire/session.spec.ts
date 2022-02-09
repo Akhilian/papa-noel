@@ -1,5 +1,6 @@
-import { Famille, Session } from '~/api/gestionnaire/gestionnaire.entities'
+import { Session } from '~/api/gestionnaire/domain/models/session'
 import { TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
 
 describe('Session', () => {
   describe('initierUnTirageAuSort', () => {

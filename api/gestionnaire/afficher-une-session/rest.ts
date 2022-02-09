@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { GestionnaireRepository } from '../repository'
+import { GestionnaireRepository } from '../infrastructure/repository'
 import { SessionSerializer } from '../serializer'
 
 export const afficherUneSession = async (request: Request, res: Response) => {

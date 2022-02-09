@@ -1,7 +1,9 @@
-import { Famille, Participant, Session } from '../../../api/gestionnaire/gestionnaire.entities'
+import { Session } from '../../../api/gestionnaire/domain/models/session'
 import { ParticipantSerializer, SessionSerializer } from '../../../api/gestionnaire/serializer'
 import { prisma } from '~/api/prisma'
 import cleanDb from '~/tests/api/clean_db'
+import { Participant } from '~/api/gestionnaire/domain/models/participant'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
 
 describe('Gestionnaire', () => {
   describe('Serializer', () => {

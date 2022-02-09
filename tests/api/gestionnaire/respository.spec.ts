@@ -1,7 +1,8 @@
 import { prisma } from '~/api/prisma'
-import { Famille, Session } from '~/api/gestionnaire/gestionnaire.entities'
-import { GestionnaireRepository } from '~/api/gestionnaire/repository'
+import { Session } from '~/api/gestionnaire/domain/models/session'
+import { GestionnaireRepository } from '~/api/gestionnaire/infrastructure/repository'
 import cleanDb from '~/tests/api/clean_db'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
 
 describe('Gestionnaire - Repository', () => {
   let gestionnaireRepository: GestionnaireRepository

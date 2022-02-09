@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { GestionnaireRepository } from '../../gestionnaire/repository'
+import { GestionnaireRepository } from '../../gestionnaire/infrastructure/repository'
 import { TirageAuSortRepository } from '../repository'
 import { TirageAuSortSerializer } from '../serializer'
 

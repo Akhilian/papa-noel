@@ -1,6 +1,7 @@
 import { TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
-import { Famille, Participant } from '~/api/gestionnaire/gestionnaire.entities'
 import { TirageAuSortSerializer } from '~/api/tirage-au-sort/serializer'
+import { Participant } from '~/api/gestionnaire/domain/models/participant'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
 
 describe('TirageAuSort Serializer', function () {
   it('devrait retourner un tirage sans résultat', () => {

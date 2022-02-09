@@ -1,11 +1,8 @@
-import { prisma } from '../prisma'
-import { FamilleSerializer } from './serializer'
-import { Famille, Session } from './gestionnaire.entities'
-
-abstract class InterfaceGestionnaireRepository {
-  abstract getSession (id: number) : Promise<Session | undefined>
-  abstract getFamille: (_: number) => Promise<undefined | Famille>
-}
+import { prisma } from '../../prisma'
+import { FamilleSerializer } from '../serializer'
+import { Session } from '../domain/models/session'
+import { InterfaceGestionnaireRepository } from '~/api/gestionnaire/domain/repository'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
 
 export class GestionnaireRepository implements InterfaceGestionnaireRepository {
   async getSession (id: number): Promise<Session | undefined> {

@@ -1,8 +1,9 @@
 import { prisma } from '~/api/prisma'
 import { TirageAuSortRepository } from '~/api/tirage-au-sort/repository'
 import { Resultat, TirageAuSort } from '~/api/tirage-au-sort/tirageAuSort.entities'
-import { Famille, Participant } from '~/api/gestionnaire/gestionnaire.entities'
 import cleanDb from '~/tests/api/clean_db'
+import { Participant } from '~/api/gestionnaire/domain/models/participant'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
 
 describe('Tirage au sort - Repository', () => {
   let tirageAuSortRepository: TirageAuSortRepository

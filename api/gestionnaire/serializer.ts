@@ -1,4 +1,6 @@
-import { Famille, Participant, Session } from './gestionnaire.entities'
+import { Participant } from '~/api/gestionnaire/domain/models/participant'
+import { Famille } from '~/api/gestionnaire/domain/models/famille'
+import { Session } from '~/api/gestionnaire/domain/models/session'
 
 const anonymiserNumeroDeTelephone = (numero: number): string => {
   return String(numero).replace(/^(\d{8})/, '********')
